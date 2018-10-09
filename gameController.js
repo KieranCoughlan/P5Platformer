@@ -8,15 +8,15 @@ function setup() {
     createCanvas(500, 300);
     frameRate(fps);
     
-    levels.push(new level());
+    levels.push(new Level());
     currentLevel = levels[0];
    
     let playerSize = 20;
     let playerPos = createVector(playerSize / 2, 
                                  height - playerSize / 2);
 
-    player = new playerController(playerPos, playerSize, 1, 1, 1 / fps);
-    input = new inputController(player, 100);
+    player = new PlayerController(playerPos, playerSize, 1, 1, 1 / fps);
+    input = new InputController(player, 100);
 }
 
 function draw() {

@@ -1,6 +1,6 @@
 // A simple player class
 
-class playerController{
+class PlayerController{
   constructor(pos, size, mass, gravity, timestep){
     this.pos = pos;
     this.lastPos = pos.copy();
@@ -11,6 +11,7 @@ class playerController{
     this.f = createVector();
     this.v = createVector();
     this.a = createVector();
+    this.onGround = false; // Will be determined
   }
   
   move(){

@@ -1,4 +1,4 @@
-class inputController{
+class InputController{
     constructor(player, pushStrength){
       this.player = player;
       this.pushStrength = pushStrength;

@@ -3,12 +3,19 @@ class Platform{
         this.pos = pos;
         this.width = width;
         this.height = height;
-        let boundaryCentre = createVector(pos.x + width /2, pos.y);
-        this.boundary = new Boundary(BOUNDARY_BELOW, boundaryCentre, width);
+        this.boundary = new Boundary(BOUNDARY_BELOW, pos, width);
     }
 
     draw(){
-        rect(this.pos, this.width, this.height);
+        push();
+
+        fill('green');
+        
+        // Position is centre of top of platform
+        rectMode(CORNER);
+        rect(this.pos.x - this.width /2, this.pos.y, this.width, this.height);
+        
+        pop();
     }
 
 }

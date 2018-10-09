@@ -1,4 +1,4 @@
-class level {
+class Level {
 
     constructor(){
         this.platforms = [];
@@ -33,11 +33,15 @@ class level {
     }
 
     allBoundaries(){
+        // Build a list of all boundaries, both edges and platform
+        // boundaries
         let allBoundaries = [];
         allBoundaries.push(this.edgeBoundaries);
         this.platforms.forEach(element => {
             allBoundaries.push(element.boundary);
         });
+
+        return allBoundaries;
     }
 
 }
