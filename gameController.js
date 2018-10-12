@@ -15,13 +15,14 @@ function setup() {
     let playerPos = createVector(playerSize / 2, 
                                  height - playerSize / 2);
 
-    player = new PlayerController(playerPos, playerSize, 1, 1, 1 / fps);
-    input = new InputController(player, 100);
+    player = new PlayerController(playerPos, playerSize, 1, 5, 1 / fps);
+    input = new InputController(player, 100, 10);
 }
 
 function draw() {
     currentLevel.draw();
     input.checkInput();
     player.move();
+    currentLevel.checkPlayer(player);
     player.draw();
 }
