@@ -12,7 +12,7 @@ class Boundary {
 
     checkPlayer(player) {
         // Outside the bounds? Nothing to do
-        if (this.inBounds == false)
+        if (this.inBounds(player) == false)
             return false;
 
         let touching = this.touching(player);
@@ -81,15 +81,17 @@ class Boundary {
             let xMin = this.pos.x - tolerance;
             let xMax = this.pos.x + tolerance;
 
-            return (player.x > xMin && player.x < xMax);
+            return (player.pos.x > xMin && player.pos.x < xMax);
         }
         else {
             // Vertical boundary, check y
             let yMin = this.pos.y - tolerance;
             let yMax = this.pos.y + tolerance;
 
-            return (player.y > yMin && player.y < yMax);
+            return (player.pos.y > yMin && player.pos.y < yMax);
         }
+
+        return false;
     }
 
     touching(player) {
@@ -135,6 +137,8 @@ class Boundary {
             // ahead means to the left 
             return (playerPos.x + gap <= this.pos.x);
         }
+
+        return false;
     }
 
 };
