@@ -1,17 +1,21 @@
 // A simple player class
 
 class PlayerController{
-  constructor(pos, size, mass, gravity, timestep){
+  constructor(pos, size, mass, gravity, timestep, pushStrength, jumpStrength){
     this.pos = pos;
     this.lastPos = pos.copy();
     this.size = size;
     this.m = mass;
     this.g = gravity;
     this.t = timestep;
+    this.pushStrength = pushStrength;
+    this.jumpStrength = jumpStrength;
     this.f = createVector();
     this.v = createVector();
     this.a = createVector();
-    this.onGround = false; // Will be determined
+    this.jumpsLeft = 0; // Will be determined
+    this.framesBetweenJumps = 10; 
+    this.framesSinceLastJump = this.framesBetweenJumps;
   }
   
   move(){
@@ -42,6 +46,9 @@ class PlayerController{
 
     // Zero out force
     this.f.set(0.0, 0.0);
+
+    // Increment this 
+    this.framesSinceLastJump++;
   }
 
   draw(){
@@ -53,6 +60,23 @@ class PlayerController{
     // Add onto all existing forces 
     // (cleared once we move each frame)
     this.f.add(newForce);
+  }
+
+  pushLeft(){
+    this.addForce(createVector(-this.pushStrength, 0.0));
+  }
+
+  pushRight(){
+    this.addForce(createVector(this.pushStrength, 0.0));
+  }
+
+  jump(){
+    if (this.jumpsLeft > 0 &&
+        this.framesSinceLastJump > this.framesBetweenJumps){
+      this.jumpsLeft--;
+      this.framesSinceLastJump = 0;
+      this.addForce(createVector(0.0, -this.jumpStrength));
+    }
   }
 
 };

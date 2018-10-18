@@ -48,6 +48,7 @@ class Boundary {
         }
         else if (this.type == BOUNDARY_BELOW){
             player.pos.y = this.pos.y - gap;
+            player.jumpsLeft = 2; //  1 == single jump, 2 == double jump
         }
         else if (this.type == BOUNDARY_LEFT){
             player.pos.x = this.pos.x + gap;

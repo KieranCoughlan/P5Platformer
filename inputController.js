@@ -1,19 +1,16 @@
 class InputController{
-    constructor(player, pushStrength, jumpStrength){
-      this.player = player;
-      this.pushStrength = pushStrength;
-      this.jumpStrength = jumpStrength;
+    constructor(){
     }
 
-    checkInput(){
+    checkInput(player){
         if (keyIsDown(LEFT_ARROW)){
-          this.player.addForce(createVector(-this.pushStrength, 0.0));
+          player.pushLeft();
         }
         else if (keyIsDown(RIGHT_ARROW)){
-          this.player.addForce(createVector(this.pushStrength, 0.0));
+          player.pushRight();
         }
-        else if (keyIsDown(UP_ARROW)){
-          this.player.addForce(createVector(0.0, -this.jumpStrength));
+        else if (keyIsDown(32)){ // Space
+          player.jump();
         }
     }
 }
