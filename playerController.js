@@ -13,9 +13,12 @@ class PlayerController{
     this.f = createVector();
     this.v = createVector();
     this.a = createVector();
+    this.onGround = false;
     this.jumpsLeft = 0; // Will be determined
     this.framesBetweenJumps = 10; 
     this.framesSinceLastJump = this.framesBetweenJumps;
+    this.groundFriction = 2.0; // Slows us on the ground, the bigger, the quicker
+    this.airFriction = 0.3; // Slows horizontally in the air, the bigger, the quicker
   }
   
   move(){
@@ -24,6 +27,14 @@ class PlayerController{
 
     // Work out total force by adding gravity
     this.addForce(createVector(0.0, this.g));
+
+    // Add a horizontal friction force in the 
+    // opposite direction to the way we're moving
+    // Different for ground and air
+    if (this.onGround)
+      this.addForce(createVector(this.v.x * -this.groundFriction, 0.0));
+    else
+      this.addForce(createVector(this.v.x * -this.airFriction, 0.0));
 
     // Work out accelleration (accel = force/mass)
     this.a = p5.Vector.div(this.f, this.m);
@@ -49,6 +60,14 @@ class PlayerController{
 
     // Increment this 
     this.framesSinceLastJump++;
+
+    // On the ground? Allow jumps
+    if (this.onGround)
+      this.jumpsLeft = 1; // Double jumps
+
+    // Set this false now and when
+    // we check boundaries it might be true again
+    player.onGround = false;
   }
 
   draw(){
