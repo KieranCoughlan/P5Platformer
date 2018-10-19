@@ -13,7 +13,7 @@ function setup() {
    
     let playerSize = 20;
     let playerPos = createVector(playerSize / 2, 
-                                 height - playerSize / 2);
+                                 height - playerSize );
 
     player = new PlayerController(playerPos, playerSize, 1, 50, 
                                   1 / fps, 100, 2000);

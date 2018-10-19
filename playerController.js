@@ -4,7 +4,7 @@ class PlayerController{
   constructor(pos, size, mass, gravity, timestep, pushStrength, jumpStrength){
     this.pos = pos;
     this.lastPos = pos.copy();
-    this.size = size;
+    this.size = createVector(size, size * 1.5); // Square for now
     this.m = mass;
     this.g = gravity;
     this.t = timestep;
@@ -72,7 +72,7 @@ class PlayerController{
 
   draw(){
     // Just a circle for now
-    ellipse(this.pos.x, this.pos.y, this.size, this.size);
+    ellipse(this.pos.x, this.pos.y, this.size.x, this.size.y);
   }
 
   addForce(newForce){

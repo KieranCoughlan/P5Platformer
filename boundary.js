@@ -40,21 +40,20 @@ class Boundary {
     }
 
     constrainPlayer(player){
-        let gap = player.size / 2;
-
+ 
         // Snap the player position to the surface
         if (this.type == BOUNDARY_ABOVE){
-            player.pos.y = this.pos.y + gap;
+            player.pos.y = this.pos.y + player.size.y / 2;
         }
         else if (this.type == BOUNDARY_BELOW){
-            player.pos.y = this.pos.y - gap;
+            player.pos.y = this.pos.y -  player.size.y / 2;
             player.onGround = true;
         }
         else if (this.type == BOUNDARY_LEFT){
-            player.pos.x = this.pos.x + gap;
+            player.pos.x = this.pos.x +  player.size.x / 2;
         }
         else if (this.type == BOUNDARY_RIGHT){
-            player.pos.x = this.pos.x - gap;
+            player.pos.x = this.pos.x -  player.size.x / 2;
         }
 
         // Stop it moving by setting
@@ -75,10 +74,11 @@ class Boundary {
     // Checks if the player is within the bounds
     // of the boundary
     inBounds(player) {
-        let tolerance = this.size / 2 + player.size / 2;
-
+        
         if (this.isHorizontal()) {
             // Horizontal boundary, check x
+            let tolerance = this.size / 2 + player.size.x / 2;
+
             let xMin = this.pos.x - tolerance;
             let xMax = this.pos.x + tolerance;
 
@@ -86,6 +86,8 @@ class Boundary {
         }
         else {
             // Vertical boundary, check y
+            let tolerance = this.size / 2 + player.size.y / 2;
+
             let yMin = this.pos.y - tolerance;
             let yMax = this.pos.y + tolerance;
 
@@ -103,40 +105,40 @@ class Boundary {
         // Distance between player and boundary
         let dist;
 
+        // Distance must be less or equal to
+        // half the player size to be touching
         if (this.isHorizontal()) {
             // Vertical distance between player 
             // and boundary 
             dist = player.pos.y - this.pos.y;
-        }
+            return Math.abs(dist) <= player.size.y / 2;        }
         else {
             // Horizontal distance between player 
             // and boundary 
             dist = player.pos.x - this.pos.x;
+            return Math.abs(dist) <= player.size.x / 2;
         }
 
-        // Distance must be less or equal to
-        // half the player size to be touching
-        return Math.abs(dist) <= player.size / 2;
+        return false;
     }
 
     ahead(playerPos, playerSize) {
-        let gap = playerSize / 2;
 
         if (this.type == BOUNDARY_ABOVE) {
             // ahead means down the screen 
-            return (playerPos.y - gap >= this.pos.y);
+            return (playerPos.y - playerSize.y / 2 >= this.pos.y);
         }
         else if (this.type == BOUNDARY_BELOW) {
             // ahead means up the screen 
-            return (playerPos.y + gap <= this.pos.y);
+            return (playerPos.y + playerSize.y / 2 <= this.pos.y);
         }
         else if (this.type == BOUNDARY_LEFT) {
             // ahead means to the right 
-            return (playerPos.x - gap >= this.pos.x);
+            return (playerPos.x - playerSize.x / 2 >= this.pos.x);
         }
         else if (this.type == BOUNDARY_RIGHT) {
             // ahead means to the left 
-            return (playerPos.x + gap <= this.pos.x);
+            return (playerPos.x + playerSize.x / 2 <= this.pos.x);
         }
 
         return false;
