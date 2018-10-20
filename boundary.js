@@ -111,7 +111,8 @@ class Boundary {
             // Vertical distance between player 
             // and boundary 
             dist = player.pos.y - this.pos.y;
-            return Math.abs(dist) <= player.size.y / 2;        }
+            return Math.abs(dist) <= player.size.y / 2;        
+        }
         else {
             // Horizontal distance between player 
             // and boundary 
