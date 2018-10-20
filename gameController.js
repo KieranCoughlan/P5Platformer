@@ -11,9 +11,9 @@ function setup() {
     setupLevels();
     currentLevel = levels[0];
    
-    let playerSize = 20;
-    let playerPos = createVector(playerSize / 2, 
-                                 height - playerSize );
+    let playerSize = createVector(20, 30);
+    let playerPos = createVector(playerSize.x / 2, 
+                                 height - playerSize.y / 2);
 
     player = new PlayerController(playerPos, playerSize, 1, 50, 
                                   1 / fps, 100, 2000);
