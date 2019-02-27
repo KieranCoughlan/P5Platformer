@@ -2,7 +2,7 @@ let currentLevel; // A variable for the current level
 let levels = [];  // A list for all levels;
 let player;       // A variable for the player
 let input;        // A variable for input processing
-let fps = 30;     // Frame rate
+let fps = 60;     // Frame rate
 
 function setup() {
     createCanvas(500, 300);
