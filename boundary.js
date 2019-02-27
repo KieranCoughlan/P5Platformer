@@ -1,6 +1,6 @@
 let BOUNDARY_ABOVE = 0;
 let BOUNDARY_BELOW = 1;
-let BOUNDARY_LEFT = 2;
+let BOUNDARY_LEFT  = 2;
 let BOUNDARY_RIGHT = 3;
 
 class Boundary {
